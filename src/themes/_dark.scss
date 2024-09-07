@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use './themes';
 @use './tango-colors' as tango;
 
@@ -5,6 +6,9 @@ $fill: tango.$aluminium-darkest;
 $stroke: tango.$aluminium-lightest;
 $light-stroke: tango.$aluminium-lightest;
 $dark-stroke: tango.$aluminium-darkest;
+
+$highlight-fill: tango.$sky-blue-dark;
+$highlight-stroke: $light-stroke;
 
 $severity-success-fill: tango.$chameleon-medium;
 $severity-success-stroke: $dark-stroke;
@@ -45,14 +49,25 @@ $severity-critical-stroke: $light-stroke;
       (
         border-stroke: tango.$aluminium-medium,
         standard-fill: tango.$aluminium-dark,
+        standard-fill--hover: color.adjust(tango.$aluminium-dark, $blackness: 20%),
         standard-stroke: $stroke,
+        emphasized-fill: $highlight-fill,
+        emphasized-fill--hover: color.adjust($highlight-fill, $blackness: 20%),
+        emphasized-stroke: $highlight-stroke,
+        understated-fill: transparent,
+        understated-fill--hover: color.adjust(tango.$aluminium-medium, $alpha: -0.8),
+        understated-stroke: $stroke,
         success-fill: $severity-success-fill,
+        success-fill--hover: color.adjust($severity-success-fill, $blackness: 20%),
         success-stroke: $severity-success-stroke,
         warning-fill: $severity-warning-fill,
+        warning-fill--hover: color.adjust($severity-warning-fill, $blackness: 20%),
         warning-stroke: $severity-warning-stroke,
         error-fill: $severity-error-fill,
+        error-fill--hover: color.adjust($severity-error-fill, $blackness: 20%),
         error-stroke: $severity-error-stroke,
         critical-fill: $severity-critical-fill,
+        critical-fill--hover: color.adjust($severity-critical-fill, $blackness: 20%),
         critical-stroke: $severity-critical-stroke,
       )
   );

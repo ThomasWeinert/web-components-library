@@ -6,6 +6,7 @@ $_button-height: 32px;
 
 button {
   --button-fill: #{themes.variable(button, standard-fill)};
+  --button-fill--hover: #{themes.variable(button, standard-fill--hover)};
   --button-stroke: #{themes.variable(button, standard-stroke)};
   --button-border-stroke: #{themes.variable('button', 'border-stroke')};
   --icon-size: 22px;
@@ -16,6 +17,7 @@ button {
   border-radius: ui.$radius-medium;
   box-sizing: border-box;
   color: var(--button-stroke);
+  cursor: pointer;
   display: inline-flex;
   flex-direction: row;
   gap: ui.$distance-small;
@@ -24,9 +26,21 @@ button {
   padding: 0 ui.$distance-medium;
   white-space: nowrap;
 
+  &:hover {
+    background: var(--button-fill--hover);
+  }
+
+  &:disabled {
+    cursor: default;
+    filter: grayscale(1);
+    opacity: 50%;
+    pointer-events: none;
+  }
+
   @each $_, $severity in severities.$severities {
     &[data-variant=#{$severity}] {
       --button-fill: #{themes.variable(button, #{$severity}-fill)};
+      --button-fill--hover: #{themes.variable(button, #{$severity}-fill--hover)};
       --button-border-stroke: #{themes.variable(button, #{$severity}-fill)};
       --button-stroke: #{themes.variable(button, #{$severity}-stroke)};
     }
@@ -34,8 +48,12 @@ button {
   @each $variant in (standard, empasized, understated) {
     &[data-variant=#{$variant}] {
       --button-fill: #{themes.variable(button, #{$variant}-fill)};
+      --button-fill--hover: #{themes.variable(button, #{$variant}-fill--hover)};
       --button-stroke: #{themes.variable(button, #{$variant}-stroke)};
     }
+  }
+  &[data-variant='understated'] {
+    --button-border-stroke: transparent;
   }
 
   &[data-shape="pill"] {

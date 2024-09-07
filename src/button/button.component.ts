@@ -8,7 +8,7 @@ import {Connected} from "../lifecycle/connected";
 export class ButtonComponent extends HTMLElement implements AttributeChanged, Connected {
 
   public static observedAttributes = [
-    'icon', 'shape', 'variant'
+    'disabled', 'icon', 'shape', 'variant'
   ];
 
   private readonly _elements: {
@@ -46,8 +46,19 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged, Co
     this._elements.label.append(...this.childNodes);
   }
 
+  public get disabled() {
+    return this._elements.button.disabled;
+  }
+
+  public set disabled(value: boolean) {
+    this._elements.button.disabled = value;
+  }
+
   public attributeChangedCallback(name: string, _: string, newValue: string) {
     switch (name) {
+      case 'disabled':
+        this.disabled = newValue !== null;
+        break;
       case 'icon':
         this._elements.icon.dataset.active = (newValue !== '') ? 'true' : 'false';
         this._elements.icon.setAttribute('icon', newValue);

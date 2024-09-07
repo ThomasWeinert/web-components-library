@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/web-components';
-import {Icon} from "../../src/icon/icon";
 import {mdiTestTube} from '@mdi/js';
 
 const meta: Meta = {
@@ -22,10 +21,19 @@ export const Pill: StoryObj = {
   `,
 }
 
-
 export const Critical: StoryObj = {
   render: () => `
     <wct-button variant="critical">Example</wct-button>
+  `,
+}
+
+export const CriticalDisabled: StoryObj = {
+  render: () => `
+    <wct-button id="test-button" variant="critical" disabled>Example</wct-button>
+    <br>
+    <br>
+    <wct-button variant="understated" onClick="document.querySelector('#test-button').removeAttribute('disabled')">Enable</wct-button>
+    <wct-button variant="understated" onClick="document.querySelector('#test-button').setAttribute('disabled', '')">Disable</wct-button>
   `,
 }
 
