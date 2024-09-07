@@ -1,0 +1,13 @@
+span {
+  display: inline-block;
+  background-color: currentColor;
+  width: var(--icon-size, 1em);
+  height: var(--icon-size, 1em);
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+
+  &:not([data-active="true"]) {
+    display: none;
+  }
+}

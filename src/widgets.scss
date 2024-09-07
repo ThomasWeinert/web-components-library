@@ -1,0 +1,18 @@
+@use 'themes/themes';
+@use 'themes/light';
+@use 'themes/dark';
+
+html, body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background: var(--view-fill);
+  color: var(--view-stroke);
+}
+
+:root, .theme-light {
+  @include light.define();
+}
+.theme-dark {
+  @include dark.define();
+}

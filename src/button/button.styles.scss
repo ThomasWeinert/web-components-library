@@ -1,0 +1,58 @@
+@use '../properties/severities';
+@use '../themes/themes';
+@use '../themes/ui';
+
+$_button-height: 32px;
+
+button {
+  --button-fill: #{themes.variable(button, standard-fill)};
+  --button-stroke: #{themes.variable(button, standard-stroke)};
+  --button-border-stroke: #{themes.variable('button', 'border-stroke')};
+  --icon-size: 22px;
+
+  align-items: center;
+  background: var(--button-fill);
+  border: 1px solid var(--button-border-stroke);
+  border-radius: ui.$radius-medium;
+  box-sizing: border-box;
+  color: var(--button-stroke);
+  display: inline-flex;
+  flex-direction: row;
+  gap: ui.$distance-small;
+  min-height: $_button-height;
+  min-width: $_button-height;
+  padding: 0 ui.$distance-medium;
+  white-space: nowrap;
+
+  @each $_, $severity in severities.$severities {
+    &[data-variant=#{$severity}] {
+      --button-fill: #{themes.variable(button, #{$severity}-fill)};
+      --button-border-stroke: #{themes.variable(button, #{$severity}-fill)};
+      --button-stroke: #{themes.variable(button, #{$severity}-stroke)};
+    }
+  }
+  @each $variant in (standard, empasized, understated) {
+    &[data-variant=#{$variant}] {
+      --button-fill: #{themes.variable(button, #{$variant}-fill)};
+      --button-stroke: #{themes.variable(button, #{$variant}-stroke)};
+    }
+  }
+
+  &[data-shape="pill"] {
+    max-height: $_button-height;
+    border-radius: calc($_button-height * 0.5);
+  }
+
+  .label {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .icon:first-child {
+    margin-left: calc(#{ui.$distance-medium} * -0.5);
+  }
+
+  .icon:not([data-active='true']) {
+    display: none;
+  }
+}

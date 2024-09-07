@@ -1,0 +1,47 @@
+@use 'sass:meta';
+
+$prefix: '--wct-theme' !default;
+
+@function variable-name($component, $identifier) {
+  @if not $identifier {
+    @error 'No theme identifier provided.';
+
+    @return null;
+  }
+
+  @if not $component {
+    @error 'No theme component provided.';
+
+    @return null;
+  }
+
+  @return #{$prefix}-C-#{$component}-I-#{$identifier};
+}
+
+@function variable($component, $identifier, $default: null) {
+  @if $default {
+    @return var(#{variable-name($component, $identifier)}, #{$default});
+  } @else {
+    @return var(#{variable-name($component, $identifier)});
+  }
+}
+
+@mixin defineComponent($component, $values) {
+  @if not $component {
+    @error 'No theme component provided.';
+  }
+
+  @if not meta.type-of($values) == 'map' {
+    @error 'No values for theme component provided.';
+  }
+
+  @each $identifier, $value in $values {
+    #{variable-name($component, $identifier)}: $value;
+  }
+}
+
+@mixin defineComponents($components) {
+  @each $component, $values in $components {
+    @include defineComponent($component, $values);
+  }
+}

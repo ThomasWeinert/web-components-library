@@ -1,0 +1,11 @@
+@use './themes';
+
+$distance-small: #{themes.variable(distance, small)};
+$distance-medium: #{themes.variable(distance, medium)};
+$distance-large: #{themes.variable(distance, large)};
+
+$radius-small: #{themes.variable(radius, small)};
+$radius-medium: #{themes.variable(radius, medium)};
+$radius-large: #{themes.variable(radius, large)};
+
+

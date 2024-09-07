@@ -1,0 +1,33 @@
+{
+  "name": "qs-widgets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run storybook",
+    "storybook": "storybook dev -p 6006",
+    "build": "storybook build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@mdi/js": "^7.4.47",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-links": "^8.2.9",
+    "@storybook/addon-webpack5-compiler-swc": "^1.0.5",
+    "@storybook/blocks": "^8.2.9",
+    "@storybook/test": "^8.2.9",
+    "@storybook/web-components": "^8.2.9",
+    "@storybook/web-components-webpack5": "^8.2.9",
+    "lit": "^3.2.0",
+    "sass-to-string": "^1.6.4",
+    "storybook": "^8.2.9"
+  },
+  "dependencies": {
+    "@storybook/addon-storysource": "^8.2.9",
+    "remark-gfm": "^4.0.0"
+  }
+}

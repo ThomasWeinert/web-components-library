@@ -1,0 +1,59 @@
+@use './themes';
+@use './tango-colors' as tango;
+
+$fill: tango.$aluminium-darkest;
+$stroke: tango.$aluminium-lightest;
+$light-stroke: tango.$aluminium-lightest;
+$dark-stroke: tango.$aluminium-darkest;
+
+$severity-success-fill: tango.$chameleon-medium;
+$severity-success-stroke: $dark-stroke;
+$severity-warning-fill: tango.$orange-light;
+$severity-warning-stroke: $dark-stroke;
+$severity-error-fill: tango.$orange-dark;
+$severity-error-stroke: $light-stroke;
+$severity-critical-fill: tango.$scarlet-red-light;
+$severity-critical-stroke: $light-stroke;
+
+@mixin define() {
+  --view-fill: #{$fill};
+  --view-stroke: #{$stroke};
+
+  // general property variable
+
+  @include themes.defineComponent(
+      distance,
+      (
+        small: 4px,
+        medium: 8px,
+        large: 16px,
+      )
+  );
+  @include themes.defineComponent(
+      radius,
+      (
+        small: 2px,
+        medium: 4px,
+        large: 8px,
+      )
+  );
+
+  // specific component properties
+
+  @include themes.defineComponent(
+      button,
+      (
+        border-stroke: tango.$aluminium-medium,
+        standard-fill: tango.$aluminium-dark,
+        standard-stroke: $stroke,
+        success-fill: $severity-success-fill,
+        success-stroke: $severity-success-stroke,
+        warning-fill: $severity-warning-fill,
+        warning-stroke: $severity-warning-stroke,
+        error-fill: $severity-error-fill,
+        error-stroke: $severity-error-stroke,
+        critical-fill: $severity-critical-fill,
+        critical-stroke: $severity-critical-stroke,
+      )
+  );
+}
