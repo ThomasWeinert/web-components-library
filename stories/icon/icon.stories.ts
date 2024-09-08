@@ -3,6 +3,7 @@ import {ButtonComponent} from "../../src/button/button.component";
 import {Icon} from "../../src/icon/icon";
 import {IconDefinition} from "../../src/icon/icon-definition";
 import {mdiTestTube} from "@mdi/js";
+import {html} from "lit";
 
 const meta: Meta = {
   title: "Components/Icon",
@@ -13,7 +14,7 @@ const meta: Meta = {
 export default meta;
 
 export const Basic: StoryObj = {
-  render: (args) => `
+  render: (args) => html`
     <wct-icon icon="${args.icon}"></wct-icon>
   `,
   args: {

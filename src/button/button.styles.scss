@@ -76,7 +76,11 @@ button {
   }
 
   slot[name='suffix'] {
-    display: inline-flex;
+    display: none;
     gap: ui.$distance-small;
+
+    &[data-filled="true"] {
+      display: inline-flex;
+    }
   }
 }

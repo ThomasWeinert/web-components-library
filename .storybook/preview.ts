@@ -1,7 +1,8 @@
 import { Preview } from '@storybook/web-components';
 import { themes } from "@storybook/theming";
 import '!style-loader!css-loader!sass-loader!../src/widgets.scss';
-import { WctComponents } from "../src/components";
+
+import "../src/components";
 
 const preview: Preview = {
   tags: ['dev'],
@@ -34,10 +35,6 @@ const preview: Preview = {
       if (!document.body.classList.contains(selectedThemeClass)) {
         document.body.classList.add(selectedThemeClass);
       }
-      return story(context);
-    },
-    (story, context) => {
-      WctComponents.register();
       return story(context);
     },
   ],

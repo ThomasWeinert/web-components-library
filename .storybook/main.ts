@@ -24,6 +24,21 @@ const config: StorybookConfig = {
     name: "@storybook/web-components-webpack5",
     options: {},
   },
+  swc: (config: any) => {
+    console.log(config);
+    return {
+      ...config,
+      // Apply your custom SWC configuration
+      "jsc": {
+        "parser": {
+          "syntax": "typescript",
+          "decorators": true,
+          "tsx": true,
+        },
+        "externalHelpers": true
+      },
+    };
+  },
   webpackFinal: async (configuration) => {
     return {
       ...configuration,

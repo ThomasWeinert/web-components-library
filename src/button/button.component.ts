@@ -3,11 +3,10 @@ import {AttributeChanged} from "../lifecycle/attribute-changed";
 
 // @ts-ignore
 import styles from './button.styles.scss';
-import { getRegistration} from "../lifecycle/register";
+import {webComponent} from "../lifecycle/web-component";
 
+@webComponent('wct-button')
 export class ButtonComponent extends HTMLElement implements AttributeChanged {
-
-  public static register = getRegistration('wct-button', ButtonComponent);
 
   public static observedAttributes = [
     'disabled', 'icon', 'shape', 'variant'
@@ -37,6 +36,11 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged {
 
     const suffix = document.createElement('slot');
     suffix.setAttribute('name', 'suffix');
+    suffix.addEventListener(
+      'slotchange',
+      () => suffix.dataset.filled = suffix.assignedNodes().length > 0 ? 'true' : 'false'
+    );
+
 
     button.append(icon, label, suffix);
 

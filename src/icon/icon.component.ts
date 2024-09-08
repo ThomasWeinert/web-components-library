@@ -3,11 +3,10 @@ import {AttributeChanged} from "../lifecycle/attribute-changed";
 // @ts-ignore
 import styles from './icon.styles.scss';
 import {Icon} from "./icon";
-import {getRegistration} from "../lifecycle/register";
+import {webComponent} from "../lifecycle/web-component";
 
+@webComponent('wct-icon')
 export class IconComponent extends HTMLElement implements AttributeChanged {
-
-  public static register = getRegistration('wct-icon', IconComponent);
 
   public static observedAttributes = [
     'icon'
