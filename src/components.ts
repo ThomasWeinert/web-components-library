@@ -1,18 +1,12 @@
 import {ButtonComponent} from "./button/button.component";
 import {IconComponent} from "./icon/icon.component";
+import {registerComponents} from "./lifecycle/register";
 
-const components = {
-  'wct-button': ButtonComponent,
-  'wct-icon': IconComponent,
-}
+const components = [
+  ButtonComponent,
+  IconComponent,
+]
 
-export function registerComponents() {
-  Object.entries(components).forEach(
-    ([tag, component]) => {
-      if (customElements.get(tag)) {
-        return;
-      }
-      customElements.define(tag, component)
-    }
-  );
+export const WctComponents = {
+  register: () => registerComponents(components),
 }

@@ -1,8 +1,7 @@
 import { Preview } from '@storybook/web-components';
 import { themes } from "@storybook/theming";
 import '!style-loader!css-loader!sass-loader!../src/widgets.scss';
-import {ButtonComponent} from "../src/button/button.component";
-import {registerComponents} from "../src/components";
+import { WctComponents } from "../src/components";
 
 const preview: Preview = {
   tags: ['dev'],
@@ -38,7 +37,7 @@ const preview: Preview = {
       return story(context);
     },
     (story, context) => {
-      registerComponents();
+      WctComponents.register();
       return story(context);
     },
   ],

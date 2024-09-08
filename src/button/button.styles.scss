@@ -52,6 +52,7 @@ button {
       --button-stroke: #{themes.variable(button, #{$variant}-stroke)};
     }
   }
+
   &[data-variant='understated'] {
     --button-border-stroke: transparent;
   }
@@ -72,5 +73,10 @@ button {
 
   .icon:not([data-active='true']) {
     display: none;
+  }
+
+  slot[name='suffix'] {
+    display: inline-flex;
+    gap: ui.$distance-small;
   }
 }

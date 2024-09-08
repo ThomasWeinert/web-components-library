@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/web-components';
-import {mdiTestTube} from '@mdi/js';
+import {mdiFlask, mdiTestTube} from '@mdi/js';
 
 const meta: Meta = {
   title: "Components/Button",
@@ -43,5 +43,18 @@ export const WithIcon: StoryObj = {
   `,
   args: {
     icon: mdiTestTube
+  }
+}
+
+export const WithSuffixIcon: StoryObj = {
+  render: (args) => `
+    <wct-button icon="${args.icon}">
+      Example
+      <wct-icon slot="suffix" icon="${args.suffixIcon}"></wct-icon>
+    </wct-button>
+  `,
+  args: {
+    icon: mdiTestTube,
+    suffixIcon: mdiFlask,
   }
 }

@@ -3,9 +3,11 @@ import {AttributeChanged} from "../lifecycle/attribute-changed";
 
 // @ts-ignore
 import styles from './button.styles.scss';
-import {Connected} from "../lifecycle/connected";
+import { getRegistration} from "../lifecycle/register";
 
-export class ButtonComponent extends HTMLElement implements AttributeChanged, Connected {
+export class ButtonComponent extends HTMLElement implements AttributeChanged {
+
+  public static register = getRegistration('wct-button', ButtonComponent);
 
   public static observedAttributes = [
     'disabled', 'icon', 'shape', 'variant'
@@ -20,7 +22,6 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged, Co
   public constructor() {
     super();
     this.style.display = 'inline-block';
-
     const style = document.createElement('style');
     style.textContent = styles;
 
@@ -30,20 +31,19 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged, Co
 
     const icon = document.createElement('wct-icon');
     icon.classList.add('icon');
-    button.append(icon);
 
-    const label = document.createElement('span');
+    const label = document.createElement('slot');
     label.classList.add('label');
-    button.append(label);
+
+    const suffix = document.createElement('slot');
+    suffix.setAttribute('name', 'suffix');
+
+    button.append(icon, label, suffix);
 
     this._elements = {button, icon, label}
 
     const shadowRoot = this.attachShadow({mode: 'closed'});
     shadowRoot.append(style, button);
-  }
-
-  public connectedCallback(): void {
-    this._elements.label.append(...this.childNodes);
   }
 
   public get disabled() {

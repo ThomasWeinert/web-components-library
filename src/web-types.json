@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
+  "name": "example",
+  "version": "0.0.1",
+  "contributions": {
+    "html": {
+      "elements": [
+        {
+          "name": "wct-button",
+          "description": "Button",
+          "attributes": [
+            {
+              "name": "icon"
+            },
+            {
+              "name": "disabled",
+              "value": {
+                "type": "boolean"
+              }
+            },
+            {
+              "name": "shape",
+              "value": {
+                "type": "'standard'|'pill'"
+              }
+            },
+            {
+              "name": "variant",
+              "value": {
+                "type": "'standard'|'emphasized'|'understated'|'success'|'warning'|'error'|'critical'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

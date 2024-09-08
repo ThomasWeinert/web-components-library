@@ -29,5 +29,6 @@
   "dependencies": {
     "@storybook/addon-storysource": "^8.2.9",
     "remark-gfm": "^4.0.0"
-  }
+  },
+  "web-types": "./src/web-types.json"
 }
