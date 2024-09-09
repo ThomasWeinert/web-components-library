@@ -1,8 +1,9 @@
 import { Preview } from '@storybook/web-components';
 import { themes } from "@storybook/theming";
 import '!style-loader!css-loader!sass-loader!../src/widgets.scss';
+import '!style-loader!css-loader!sass-loader!./preview.scss';
 
-import "../src/components";
+import "../src/widgets";
 
 const preview: Preview = {
   tags: ['dev'],
@@ -43,6 +44,9 @@ const preview: Preview = {
     docs: {
       theme: themes.dark,
     },
+    // controls: {
+    //   disableSaveFromUI: true,
+    // },
     backgrounds: { disable: true },
     options: {
       name: 'QS Web Components',

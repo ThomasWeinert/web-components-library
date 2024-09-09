@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run storybook",
     "storybook": "storybook dev -p 6006",
-    "build": "storybook build"
+    "storybook:build": "storybook build -c .storybook -o ./build/storybook",
+    "build": "npm run build:typescript && npm run build:styles",
+    "build:typescript": "webpack",
+    "build:styles": "node tools/build-styles.js"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +28,9 @@
     "@swc/helpers": "^0.5.13",
     "lit": "^3.2.0",
     "sass-to-string": "^1.6.4",
-    "storybook": "^8.2.9"
+    "storybook": "^8.2.9",
+    "ts-loader": "^9.5.1",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@storybook/addon-storysource": "^8.2.9",

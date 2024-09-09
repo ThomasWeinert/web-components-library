@@ -1,3 +1,1 @@
-import {WctComponents} from "./components";
-
-WctComponents.register();
+import "./public-api";

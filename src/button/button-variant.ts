@@ -1,11 +1,12 @@
-import {Severity} from "../properties/severity";
-
 enum ButtonLevelVariant {
   Standard = 'standard',
   Emphasized = 'emphasized',
   Understated = 'understated',
-  Selected = 'selected',
+  Success = 'success',
+  Warning = 'warning',
+  Error = 'error',
+  Critical = 'critical'
 }
 
-export type ButtonVariant = Severity | ButtonLevelVariant;
-export const ButtonVariant = {...Severity, ...ButtonLevelVariant};
+export type ButtonVariant = ButtonLevelVariant;
+export const ButtonVariant = ButtonLevelVariant;

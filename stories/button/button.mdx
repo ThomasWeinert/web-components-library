@@ -8,3 +8,36 @@ import * as ButtonStories from './button.stories';
 Button with optional icon, different shapes and color variants.
 
 <Canvas of={ButtonStories.Standard}/>
+
+## Attributes
+
+### Disabled
+
+Disabled will remove saturation from the button, reduce opacity and disabled user interaction. It can be
+accessed as a property, too.
+
+<Canvas of={ButtonStories.Disabled}/>
+
+### Shape
+
+Buttons have a standard rectangle shape with rounded borders, or a `pill` shape.
+
+<Canvas of={ButtonStories.Pill}/>
+
+### Variant
+
+Different color variants. Three basic variants (`standard`, `emphasized`, `understated`) are available.
+
+<Canvas of={ButtonStories.Emphasized}/>
+
+<Canvas of={ButtonStories.Understated}/>
+
+Additionally, severity (`success`, `warning`, `errror`, `critical`) can be used.
+
+<Canvas of={ButtonStories.Variant} />
+
+## Properties
+
+### Disabled
+
+The disabled property indicates whether the control is disabled, meaning that it does not accept any clicks.

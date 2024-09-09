@@ -1,9 +1,8 @@
 import {ButtonVariant} from "./button-variant";
 import {AttributeChanged} from "../lifecycle/attribute-changed";
-
-// @ts-ignore
-import styles from './button.styles.scss';
 import {webComponent} from "../lifecycle/web-component";
+
+import styles from './button.styles.scss';
 
 @webComponent('wct-button')
 export class ButtonComponent extends HTMLElement implements AttributeChanged {
@@ -20,7 +19,6 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged {
 
   public constructor() {
     super();
-    this.style.display = 'inline-block';
     const style = document.createElement('style');
     style.textContent = styles;
 
@@ -58,22 +56,21 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged {
     this._elements.button.disabled = value;
   }
 
-  public attributeChangedCallback(name: string, _: string, newValue: string) {
+  public attributeChangedCallback(name: string, _: string, newValue: string | null) {
     switch (name) {
       case 'disabled':
         this.disabled = newValue !== null;
         break;
       case 'icon':
         this._elements.icon.dataset.active = (newValue !== '') ? 'true' : 'false';
-        this._elements.icon.setAttribute('icon', newValue);
+        this._elements.icon.setAttribute('icon', newValue || '');
         break;
       case 'shape':
-        this._elements.button.dataset.shape = newValue;
+        this._elements.button.dataset.shape = newValue || undefined;
         break;
       case 'variant':
-        this._elements.button.dataset.variant = newValue;
+        this._elements.button.dataset.variant = newValue || undefined;
         break;
     }
   }
 }
-

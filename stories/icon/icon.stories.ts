@@ -1,7 +1,4 @@
 import {Meta, StoryObj} from '@storybook/web-components';
-import {ButtonComponent} from "../../src/button/button.component";
-import {Icon} from "../../src/icon/icon";
-import {IconDefinition} from "../../src/icon/icon-definition";
 import {mdiTestTube} from "@mdi/js";
 import {html} from "lit";
 
@@ -16,6 +13,26 @@ export default meta;
 export const Basic: StoryObj = {
   render: (args) => html`
     <wct-icon icon="${args.icon}"></wct-icon>
+  `,
+  args: {
+    icon: mdiTestTube
+  }
+}
+export const FontSize: StoryObj = {
+  render: (args) => html`
+    <div style="font-size: 48px">
+      <wct-icon icon="${args.icon}"></wct-icon>
+    </div>
+  `,
+  args: {
+    icon: mdiTestTube
+  }
+}
+export const IconSizeVariable: StoryObj = {
+  render: (args) => html`
+    <div style="--icon-size: 48px">
+      <wct-icon icon="${args.icon}"></wct-icon>
+    </div>
   `,
   args: {
     icon: mdiTestTube

@@ -1,9 +1,8 @@
 import {AttributeChanged} from "../lifecycle/attribute-changed";
-
-// @ts-ignore
-import styles from './icon.styles.scss';
 import {Icon} from "./icon";
 import {webComponent} from "../lifecycle/web-component";
+
+import styles from './icon.styles.scss';
 
 @webComponent('wct-icon')
 export class IconComponent extends HTMLElement implements AttributeChanged {
@@ -18,6 +17,7 @@ export class IconComponent extends HTMLElement implements AttributeChanged {
 
   public constructor() {
     super();
+    //this.style.display = 'inline-flex';
 
     const style = document.createElement('style');
     style.textContent = styles;
@@ -31,10 +31,10 @@ export class IconComponent extends HTMLElement implements AttributeChanged {
     shadowRoot.append(style, icon);
   }
 
-  public attributeChangedCallback(name: string, _: string, newValue: string) {
+  public attributeChangedCallback(name: string, _: string, newValue: string | null) {
     switch (name) {
       case 'icon':
-        this.setIcon(newValue);
+        this.setIcon(newValue || '');
         break;
     }
   }
@@ -55,4 +55,3 @@ export class IconComponent extends HTMLElement implements AttributeChanged {
     return;
   }
 }
-

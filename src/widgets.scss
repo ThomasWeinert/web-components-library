@@ -12,7 +12,11 @@ html, body {
 
 :root, .theme-light {
   @include light.define();
+  background: var(--view-fill);
+  color: var(--view-stroke);
 }
 .theme-dark {
   @include dark.define();
+  background: var(--view-fill);
+  color: var(--view-stroke);
 }

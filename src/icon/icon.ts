@@ -27,7 +27,6 @@ export class Icon {
   }
 
   public static fromString(value: string, width = 24, height = 24) {
-    console.log(value);
     return Icon.create({path: value, width, height})
   }
 }

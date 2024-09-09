@@ -16,7 +16,7 @@
     "jsx": "react"
   },
   "files": [
-    "./typings.ts"
+    "./typings.d.ts"
   ],
   "include": [
     "./src/widgets.ts"
