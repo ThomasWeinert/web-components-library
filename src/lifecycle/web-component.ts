@@ -1,6 +1,5 @@
 export function webComponent(tag: string) {
   return (component: CustomElementConstructor) => {
-    console.log(tag)
     const existing = customElements.get(tag);
     if (existing) {
       if (existing !== component) {

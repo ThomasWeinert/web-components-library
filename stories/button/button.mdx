@@ -11,7 +11,15 @@ Button with optional icon, different shapes and color variants.
 
 ## Attributes
 
+### Icon
+
+Add an icon to the start of the button.
+
+<Canvas of={ButtonStories.WithIcon}/>
+
 ### Disabled
+
+The disabled attribute indicates whether the control is disabled, meaning that it does not accept any clicks.
 
 Disabled will remove saturation from the button, reduce opacity and disabled user interaction. It can be
 accessed as a property, too.
@@ -36,8 +44,16 @@ Additionally, severity (`success`, `warning`, `errror`, `critical`) can be used.
 
 <Canvas of={ButtonStories.Variant} />
 
+## Slots
+
+The `suffix` slot adds elements after the label. Any other content will be added to
+the label.
+
+<Canvas of={ButtonStories.WithSuffixIcon} />
+
 ## Properties
 
 ### Disabled
 
 The disabled property indicates whether the control is disabled, meaning that it does not accept any clicks.
+It corresponds to the `disabled` attribute.

@@ -1,7 +1,6 @@
 import { webComponent } from "../lifecycle/web-component";
 import { AttributeChanged } from "../lifecycle/attribute-changed";
 import { createFormatterFromString } from "./formatters/formatter-factory";
-import { Connected } from "../lifecycle/connected";
 import { FormatterFunction } from "./formatters/formatter-function";
 import { getNearestLocale } from "../properties/locale";
 
@@ -18,7 +17,6 @@ export class ValueComponent extends HTMLElement implements AttributeChanged {
 
   public constructor() {
     super();
-    this.style.display = 'inline-flex';
     this._value = this.textContent || '';
   }
 
