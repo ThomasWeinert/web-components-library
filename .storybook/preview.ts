@@ -3,7 +3,10 @@ import { themes } from "@storybook/theming";
 import '!style-loader!css-loader!sass-loader!../src/widgets.scss';
 import '!style-loader!css-loader!sass-loader!./preview.scss';
 
+import * as echarts from "echarts";
 import "../src/widgets";
+
+window.echarts = echarts;
 
 const preview: Preview = {
   tags: ['dev'],

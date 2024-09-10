@@ -59,7 +59,7 @@ export class ArgumentControls {
     },
   ): ArgType {
     const values = Object.values(map);
-    const labels = Object.fromEntries(
+    const labels = values instanceof Array ? values : Object.fromEntries(
       Object.entries(map).map(
         (a) => a.reverse(),
       ),

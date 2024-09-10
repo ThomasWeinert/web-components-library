@@ -1,9 +1,9 @@
 import { AttributeChanged } from "../lifecycle/attribute-changed";
 import { Icon } from "./icon";
 import { webComponent } from "../lifecycle/web-component";
+import { iconLibraries } from "./icon-library-service";
 
 import styles from './icon.styles.scss';
-import { iconLibraries } from "./icon-library-service";
 
 @webComponent('wct-icon')
 export class IconComponent extends HTMLElement implements AttributeChanged {
