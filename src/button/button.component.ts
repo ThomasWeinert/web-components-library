@@ -56,7 +56,7 @@ export class ButtonComponent extends HTMLElement implements AttributeChanged {
     this._elements.button.disabled = value;
   }
 
-  public attributeChangedCallback(name: string, _: string, newValue: string | null) {
+  public attributeChangedCallback(name: string, _: string | null, newValue: string | null) {
     switch (name) {
       case 'disabled':
         this.disabled = newValue !== null;

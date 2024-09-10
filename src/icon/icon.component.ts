@@ -1,8 +1,9 @@
-import {AttributeChanged} from "../lifecycle/attribute-changed";
-import {Icon} from "./icon";
-import {webComponent} from "../lifecycle/web-component";
+import { AttributeChanged } from "../lifecycle/attribute-changed";
+import { Icon } from "./icon";
+import { webComponent } from "../lifecycle/web-component";
 
 import styles from './icon.styles.scss';
+import { iconLibraries } from "./icon-library-service";
 
 @webComponent('wct-icon')
 export class IconComponent extends HTMLElement implements AttributeChanged {
@@ -17,7 +18,6 @@ export class IconComponent extends HTMLElement implements AttributeChanged {
 
   public constructor() {
     super();
-    //this.style.display = 'inline-flex';
 
     const style = document.createElement('style');
     style.textContent = styles;
@@ -40,18 +40,27 @@ export class IconComponent extends HTMLElement implements AttributeChanged {
   }
 
   private setIcon(value: string) {
-    if (value === '') {
-      this._elements.icon.style.setProperty('mask-image', '');
-      this._elements.icon.dataset.active = 'false';
-      return;
-    }
     if (value.startsWith('data:')) {
       this._elements.icon.style.setProperty('mask-image', `url(${value})`);
       this._elements.icon.dataset.active = 'true';
       return;
     }
-    this._elements.icon.style.setProperty('mask-image', `url(${Icon.fromString(value)})`);
-    this._elements.icon.dataset.active = 'true';
+    if (value.match(/^[\w\d]+:/)) {
+      const [library, name] = value.split(':');
+      const icon = iconLibraries.getIcon(library, name);
+      if (icon) {
+        this._elements.icon.style.setProperty('mask-image', `url(${icon})`);
+        this._elements.icon.dataset.active = 'true';
+        return;
+      }
+    }
+    if (value !== '') {
+      this._elements.icon.style.setProperty('mask-image', `url(${Icon.fromString(value)})`);
+      this._elements.icon.dataset.active = 'true';
+      return;
+    }
+    this._elements.icon.style.setProperty('mask-image', '');
+    this._elements.icon.dataset.active = 'false';
     return;
   }
 }

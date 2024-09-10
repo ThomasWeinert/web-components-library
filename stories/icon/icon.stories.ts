@@ -1,6 +1,7 @@
-import {Meta, StoryObj} from '@storybook/web-components';
-import {mdiTestTube} from "@mdi/js";
-import {html} from "lit";
+import { Meta, StoryObj } from '@storybook/web-components';
+import { mdiTestTube } from "@mdi/js";
+import { html } from "lit";
+import { iconLibraries } from "../../src/icon/icon-library-service";
 
 const meta: Meta = {
   title: "Components/Icon",
@@ -36,5 +37,23 @@ export const IconSizeVariable: StoryObj = {
   `,
   args: {
     icon: mdiTestTube
+  }
+}
+export const Library: StoryObj = {
+  render: (args) => {
+    iconLibraries.registerIcons(
+      'test',
+      {
+        test_tube: mdiTestTube
+      }
+    );
+    return html`
+      <div style="font-size: 48px">
+        <wct-icon icon="${args.icon}"></wct-icon>
+      </div>
+    `
+  },
+  args: {
+    icon: 'test:test_tube'
   }
 }
