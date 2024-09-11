@@ -7,9 +7,10 @@ import styles from './chart.styles.scss';
 import { createChartDataFromArray } from "./chart-data/array-chart-data";
 import { createChartDataFromString } from "./chart-data/string-chart-data";
 import { ChartDataOrientation } from "./chart-data/chart-data-options";
+import { Connected } from "../lifecycle/connected";
 
 @webComponent('wct-chart')
-export class ChartComponent extends HTMLElement implements AttributeChanged {
+export class ChartComponent extends HTMLElement implements AttributeChanged, Connected {
 
   public static observedAttributes = [
     'type', 'source-layout'
@@ -30,12 +31,6 @@ export class ChartComponent extends HTMLElement implements AttributeChanged {
     const chart = document.createElement('wct-echart') as EChartComponent;
     chart.classList.add('chart');
 
-    const source = (this.textContent || '').trim();
-    if (source) {
-      this._source = source;
-      this.updateSource();
-    }
-
     this._elements = {chart}
 
     const shadowRoot = this.attachShadow({mode: 'closed'});
@@ -44,6 +39,17 @@ export class ChartComponent extends HTMLElement implements AttributeChanged {
 
   private _source?: ChartData | any[][] | string;
   private _chartData?: ChartData;
+
+  public connectedCallback(): void {
+    if (!this._source) {
+      const source = (this.textContent || '').trim();
+      if (source) {
+        this._source = source;
+        this.updateSource();
+        this.update();
+      }
+    }
+  }
 
   public get source(): ChartData | undefined {
     return this._chartData;
@@ -65,8 +71,8 @@ export class ChartComponent extends HTMLElement implements AttributeChanged {
         break;
       case 'source-layout':
         this._sourceLayout = (
-          ChartDataOrientation.Rows  === newValue
-            ?  ChartDataOrientation.Rows
+          ChartDataOrientation.Rows === newValue
+            ? ChartDataOrientation.Rows
             : ChartDataOrientation.Columns
         );
         this.updateSource();
@@ -76,9 +82,9 @@ export class ChartComponent extends HTMLElement implements AttributeChanged {
 
   private updateSource(): void {
     if (this._source instanceof Array) {
-      this._chartData = createChartDataFromArray(this._source, { sourceLayout: this._sourceLayout});
+      this._chartData = createChartDataFromArray(this._source, {sourceLayout: this._sourceLayout});
     } else if (typeof this._source === 'string') {
-      this._chartData = createChartDataFromString(this._source, { sourceLayout: this._sourceLayout});
+      this._chartData = createChartDataFromString(this._source, {sourceLayout: this._sourceLayout});
     } else {
       this._chartData = this._source as ChartData;
     }

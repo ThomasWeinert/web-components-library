@@ -55,7 +55,6 @@ export class EChartComponent extends HTMLElement implements AttributeChanged {
 
   public set options(value: Record<string, any>) {
     this._options = value;
-    console.log(value);
     this.getChartInstance().then(
       (instance) => {
         instance.setOption(this._options);

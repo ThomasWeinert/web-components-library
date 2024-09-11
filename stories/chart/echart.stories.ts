@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from '@storybook/web-components';
-import { mdiTestTube } from "@mdi/js";
 import { html } from "lit";
 import { EChartComponent } from "../../src/chart/echarts/echart.component";
 
@@ -12,7 +11,7 @@ const meta: Meta = {
 export default meta;
 
 export const Basic: StoryObj = {
-  render: (args) => html`
+  render: () => html`
     <wct-echart id="testChart" style="width: 400px;"></wct-echart>
   `,
   play: ({canvasElement}) => {
@@ -40,8 +39,5 @@ export const Basic: StoryObj = {
         ]
       }
     }
-  },
-  args: {
-    icon: mdiTestTube
   }
 }
