@@ -1,5 +1,4 @@
-import { webComponent } from "../../lifecycle/web-component";
-import { AttributeChanged } from "../../lifecycle/attribute-changed";
+import { WebComponent } from "../../lifecycle/web-component";
 import { delay } from "../../lifecycle/delay";
 import { EChartsInstance } from "./echarts-types";
 
@@ -11,10 +10,8 @@ declare global {
   }
 }
 
-@webComponent('wct-echart')
-export class EChartComponent extends HTMLElement implements AttributeChanged {
-
-  public static observedAttributes = [];
+@WebComponent('wct-echart')
+export class EChartComponent extends HTMLElement {
 
   private _options: Record<string, any> = {};
 
@@ -35,10 +32,6 @@ export class EChartComponent extends HTMLElement implements AttributeChanged {
 
     const shadowRoot = this.attachShadow({mode: 'closed'});
     shadowRoot.append(style, chart);
-  }
-
-  public attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-
   }
 
   private readonly _resizeObserver = new ResizeObserver(

@@ -1,11 +1,11 @@
-import { webComponent } from "../lifecycle/web-component";
-import { AttributeChanged } from "../lifecycle/attribute-changed";
+import { WebComponent } from "../lifecycle/web-component";
+import { WebComponentAttributeChanged } from "../lifecycle/web-component-attribute-changed";
 import { createFormatterFromString } from "./formatters/formatter-factory";
 import { FormatterFunction } from "./formatters/formatter-function";
 import { getNearestLocale } from "../properties/locale";
 
-@webComponent('wct-value')
-export class ValueComponent extends HTMLElement implements AttributeChanged {
+@WebComponent('wct-value')
+export class ValueComponent extends HTMLElement implements WebComponentAttributeChanged {
 
   public static observedAttributes = [
     'value',

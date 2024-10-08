@@ -1,16 +1,17 @@
-import { AttributeChanged } from "../lifecycle/attribute-changed";
+import { WebComponentAttributeChanged } from "../lifecycle/web-component-attribute-changed";
 import { Icon } from "./icon";
-import { webComponent } from "../lifecycle/web-component";
+import { WebComponent } from "../lifecycle/web-component";
 import { iconLibraries } from "./icon-library-service";
 
 import styles from './icon.styles.scss';
 
-@webComponent('wct-icon')
-export class IconComponent extends HTMLElement implements AttributeChanged {
-
-  public static observedAttributes = [
-    'icon'
-  ];
+@WebComponent(
+'wct-icon',
+  {
+    icon: 'string',
+  }
+)
+export class IconComponent extends HTMLElement implements WebComponentAttributeChanged {
 
   private readonly _elements: {
     icon: HTMLSpanElement;

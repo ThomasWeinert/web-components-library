@@ -1,5 +1,5 @@
-import { webComponent } from "../lifecycle/web-component";
-import { AttributeChanged } from "../lifecycle/attribute-changed";
+import { WebComponent } from "../lifecycle/web-component";
+import { WebComponentAttributeChanged } from "../lifecycle/web-component-attribute-changed";
 import { ChartData } from "./chart-data/chart-data";
 import { EChartComponent } from "./echarts/echart.component";
 
@@ -7,14 +7,16 @@ import styles from './chart.styles.scss';
 import { createChartDataFromArray } from "./chart-data/array-chart-data";
 import { createChartDataFromString } from "./chart-data/string-chart-data";
 import { ChartDataOrientation } from "./chart-data/chart-data-options";
-import { Connected } from "../lifecycle/connected";
+import { WebComponentConnected } from "../lifecycle/web-component-connected";
 
-@webComponent('wct-chart')
-export class ChartComponent extends HTMLElement implements AttributeChanged, Connected {
-
-  public static observedAttributes = [
-    'type', 'source-layout'
-  ];
+@WebComponent(
+'wct-chart',
+  {
+    type: 'string',
+    'source-layout': ['column', 'row']
+  }
+)
+export class ChartComponent extends HTMLElement implements WebComponentAttributeChanged, WebComponentConnected {
 
   private readonly _elements: {
     chart: EChartComponent;
@@ -61,7 +63,7 @@ export class ChartComponent extends HTMLElement implements AttributeChanged, Con
     this.update();
   }
 
-  public attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+  public attributeChangedCallback(name: string, _: string | null, newValue: string | null): void {
     switch (name) {
       case 'type':
         if (newValue) {
@@ -108,7 +110,7 @@ export class ChartComponent extends HTMLElement implements AttributeChanged, Con
         type: 'category'
       },
       series: this._chartData.dimensions.slice(1).map(
-        (dimension, index) => ({
+        () => ({
           type: this._seriesType,
           seriesLayoutBy: 'column',
           yAxisIndex: 0,

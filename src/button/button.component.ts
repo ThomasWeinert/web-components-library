@@ -1,15 +1,19 @@
 import {ButtonVariant} from "./button-variant";
-import {AttributeChanged} from "../lifecycle/attribute-changed";
-import {webComponent} from "../lifecycle/web-component";
+import {WebComponentAttributeChanged} from "../lifecycle/web-component-attribute-changed";
+import {WebComponent} from "../lifecycle/web-component";
 
 import styles from './button.styles.scss';
 
-@webComponent('wct-button')
-export class ButtonComponent extends HTMLElement implements AttributeChanged {
-
-  public static observedAttributes = [
-    'disabled', 'icon', 'shape', 'variant'
-  ];
+@WebComponent(
+  'wct-button',
+  {
+    'disabled': 'boolean',
+    'icon': 'string',
+    'shape': ['standard', 'pill'],
+    'variant': ['standard', 'emphasized', 'understated'],
+  }
+)
+export class ButtonComponent extends HTMLElement implements WebComponentAttributeChanged {
 
   private readonly _elements: {
     button: HTMLButtonElement;
