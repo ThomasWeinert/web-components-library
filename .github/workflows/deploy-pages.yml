@@ -26,7 +26,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v3.9.1
         with:
-          cache: true
+          cache: npm
           node-version: 22
           
       - name: Build Storybook
