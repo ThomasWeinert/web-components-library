@@ -10,7 +10,7 @@ function clamp(value: number, min: number, max: number) {
     return Math.min(Math.max(value, min), max);
 }
 
-export class ColorCircleValueChange extends CustomEvent<{ hue: number, saturation: number, lightness: number }> {
+export class ColorCircleValueEvent extends CustomEvent<{ hue: number, saturation: number, lightness: number }> {
 }
 
 
@@ -43,6 +43,9 @@ export class ColorCircleComponent extends LitElement {
     private _resizeObserver = new ResizeObserver(
         () => this.updateRingSize(),
     );
+
+    @property({type: Boolean, reflect: true, attribute: 'hide-value'})
+    public hideValue: boolean = false;
 
     connectedCallback() {
         super.connectedCallback();
@@ -148,6 +151,11 @@ export class ColorCircleComponent extends LitElement {
                         </div>
                     </div>
                 </div>
+                ${!this.hideValue
+                    ? html`
+                        <div class="value"></div>`
+                    : ''
+                }
             </div>`
     }
 
@@ -186,8 +194,8 @@ export class ColorCircleComponent extends LitElement {
         }
     }
 
-    private emitColorChange() {
-        this.dispatchEvent(new CustomEvent('color-change', {
+    private emitColorEvent(type: string = 'color-change') {
+        this.dispatchEvent(new CustomEvent(type, {
             detail: {
                 hue: this.hue,
                 saturation: this.saturation,
@@ -199,13 +207,13 @@ export class ColorCircleComponent extends LitElement {
     private updateFromPosition(clientX: number, clientY: number) {
         if (this._circleChanging) {
             this.hue = this.getHueFromPosition(clientX, clientY);
-            this.emitColorChange();
+            this.emitColorEvent();
         }
         if (this._triangleChanging) {
             const {saturation, lightness} = this.getSaturationAndLightnessFromPosition(clientX, clientY);
             this.saturation = saturation;
             this.lightness = lightness;
-            this.emitColorChange();
+            this.emitColorEvent();
         }
     }
 
