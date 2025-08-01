@@ -3,7 +3,7 @@ import { Icon } from "./icon";
 import { WebComponent } from "../lifecycle/web-component";
 import { iconLibraries } from "./icon-library-service";
 
-import styles from './icon.styles.scss';
+import styles from './icon.styles.scss?inline';
 
 @WebComponent(
 'wct-icon',

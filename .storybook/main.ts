@@ -1,80 +1,14 @@
-import {StorybookConfig} from '@storybook/web-components-webpack5';
-import remarkGfm from "remark-gfm";
+import type { StorybookConfig } from '@storybook/web-components-vite';
 
 const config: StorybookConfig = {
-  stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: [
-    "@storybook/addon-webpack5-compiler-swc",
-    "@storybook/addon-actions",
-    "@storybook/addon-controls",
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
-    },
-    '@storybook/addon-toolbars',
-    '@storybook/addon-storysource'
+  "stories": [
+    "../src/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
-  framework: {
-    name: "@storybook/web-components-webpack5",
-    options: {},
-  },
-  swc: (config: any) => {
-    console.log(config);
-    return {
-      ...config,
-      // Apply your custom SWC configuration
-      "jsc": {
-        "parser": {
-          "syntax": "typescript",
-          "decorators": true,
-          "tsx": true,
-        },
-        "externalHelpers": true
-      },
-    };
-  },
-  webpackFinal: async (configuration) => {
-    return {
-      ...configuration,
-      module: {
-        ...configuration.module,
-        rules: [
-          ...(configuration?.module?.rules || []),
-          {
-            test: /\.styles.scss$/,
-            exclude: /node_modules/,
-            use: [
-              "sass-to-string",
-              {
-                loader: "sass-loader",
-                options: {
-                  sassOptions: {
-                    outputStyle: "compressed",
-                  },
-                },
-              },
-            ],
-          },
-          {
-            test: /\.(scss|css)$/,
-            exclude: [/\.styles.scss$/, /node_modules/],
-            use: [
-              "style-loader",
-              "css-loader",
-              {
-                loader: "sass-loader",
-              },
-            ],
-          },
-        ],
-      },
-    };
-  },
+  "addons": [],
+  "framework": {
+    "name": "@storybook/web-components-vite",
+    "options": {}
+  }
 };
 export default config;

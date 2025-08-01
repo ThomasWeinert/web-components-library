@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/web-components';
 import { mdiTestTube } from "@mdi/js";
 import { html } from "lit";
-import { iconLibraries } from "../../src/icon/icon-library-service";
+import { iconLibraries } from "./icon-library-service";
 
 const meta: Meta = {
   title: "Components/Icon",

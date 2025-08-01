@@ -1,8 +1,8 @@
-import {Meta, StoryObj} from '@storybook/web-components';
-import {mdiFlask, mdiTestTube} from '@mdi/js';
+import {Meta, StoryObj} from "@storybook/web-components";
 import {html} from "lit";
-import { ArgumentControls } from "../argument-controls";
-import { ButtonVariant } from "../../src/button/button-variant";
+import {ButtonVariant} from "./button-variant";
+import {ArgumentControls} from "../../.storybook/argument-controls";
+import {mdiFlask, mdiTestTube} from "@mdi/js";
 
 const meta: Meta = {
   title: "Components/Button",

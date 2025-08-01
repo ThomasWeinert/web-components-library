@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/web-components';
 import { html } from "lit";
-import { ChartComponent } from "../../src/chart/chart.component";
-import { ArgumentControls } from "../argument-controls";
+import { ChartComponent } from "./chart.component";
+import { ArgumentControls } from "../../.storybook/argument-controls";
 
 const meta: Meta = {
   title: "Components/Chart",

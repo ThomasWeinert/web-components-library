@@ -3,7 +3,7 @@ import { WebComponentAttributeChanged } from "../lifecycle/web-component-attribu
 import { ChartData } from "./chart-data/chart-data";
 import { EChartComponent } from "./echarts/echart.component";
 
-import styles from './chart.styles.scss';
+import styles from './chart.styles.scss?inline';
 import { createChartDataFromArray } from "./chart-data/array-chart-data";
 import { createChartDataFromString } from "./chart-data/string-chart-data";
 import { ChartDataOrientation } from "./chart-data/chart-data-options";

@@ -1,0 +1,117 @@
+:host {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    --hue-value: var(--hue, 0deg);
+    --saturation-value: var(--saturation, 100%);
+    --lightness-value: var(--lightness, 50%);
+
+    --ring-size-value: var(--ring-size, 40px);
+    --indicator-radius: 3px;
+    --ring-inner-radius: calc(100% - var(--ring-size-value));
+
+    --sqrt3: 1.73205081;
+    --triangle-radius-outer: calc(50% );
+    --triangle-width: calc(var(--sqrt3) * var(--triangle-radius-outer));
+    --triangle-height: calc(var(--sqrt3) * 0.5 * var(--triangle-width));
+}
+
+
+.ground {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+}
+
+.circle {
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 50%;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: conic-gradient(in hsl longer hue, hsl(0deg 100% 50%), hsl(360deg 100% 50%));
+    mask-image: radial-gradient(closest-side, #0000 0, #0000 var(--ring-inner-radius), #000f var(--ring-inner-radius));
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-clip: border-box;
+    mask-size: 100%;
+    box-shadow: inset 2px 2px 2px 2px rgba(0 0 0 / 20%);
+    cursor: pointer;
+}
+
+.triangle-container {
+    position: absolute;
+    top: var(--ring-size-value);
+    bottom: var(--ring-size-value);
+    left: var(--ring-size-value);
+    right: var(--ring-size-value);
+    border-radius: 50%;
+    pointer-events: all;
+    cursor: default;
+
+    &:after {
+        pointer-events: none;
+        content: ' ';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 50%;
+        box-shadow: 2px 2px 2px 2px rgba(0 0 0 / 20%);
+    }
+}
+
+.triangle {
+    width: 100%;
+    height: 100%;
+    transform: rotate(var(--hue-value));
+    transform-origin: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    pointer-events: none;
+
+    .triangle-gradient {
+        --triangle-indicator-x: var(--lightness-value);
+        --triangle-indicator-y: calc(100% - var(--saturation-value));
+        --saturation-gradient: linear-gradient(to bottom, hsl(var(--hue-value) 100% 50%), hsl(var(--hue-value) 100% 0%) 100%);
+        --lightness-gradient: linear-gradient(to left, hsl(var(--hue-value) 100% 100%), hsl(var(--hue-value) 100% 100% / 0%) 50%);
+        display: block;
+        top: 0;
+        position: absolute;
+        width: var(--triangle-width);
+        height: var(--triangle-height);
+
+        &:before {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            content: ' ';
+            background: var(--lightness-gradient), var(--saturation-gradient);
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            pointer-events: all;
+            cursor: pointer;
+        }
+    }
+
+    .triangle-indicator {
+        --triangle-indicator-size: calc(var(--indicator-radius) * 2);
+        display: block;
+        pointer-events: none;
+        position: absolute;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 1px solid white;
+        outline: 1px solid black;
+        outline-offset: 0;
+        width: var(--triangle-indicator-size);
+        height: var(--triangle-indicator-size);
+        left: calc(var(--triangle-indicator-x) - var(--indicator-radius));
+        top: calc(var(--triangle-indicator-y) - var(--indicator-radius));
+    }
+}

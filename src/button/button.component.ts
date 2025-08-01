@@ -2,7 +2,7 @@ import {ButtonVariant} from "./button-variant";
 import {WebComponentAttributeChanged} from "../lifecycle/web-component-attribute-changed";
 import {WebComponent} from "../lifecycle/web-component";
 
-import styles from './button.styles.scss';
+import styles from './button.styles.scss?inline';
 
 @WebComponent(
   'wct-button',
@@ -48,7 +48,7 @@ export class ButtonComponent extends HTMLElement implements WebComponentAttribut
 
     this._elements = {button, icon, label}
 
-    const shadowRoot = this.attachShadow({mode: 'closed'});
+    const shadowRoot = this.attachShadow({mode: 'open'});
     shadowRoot.append(style, button);
   }
 

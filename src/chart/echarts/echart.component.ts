@@ -2,7 +2,7 @@ import { WebComponent } from "../../lifecycle/web-component";
 import { delay } from "../../lifecycle/delay";
 import { EChartsInstance } from "./echarts-types";
 
-import styles from './echart.styles.scss';
+import styles from './echart.styles.scss?inline';
 
 declare global {
   interface Window {

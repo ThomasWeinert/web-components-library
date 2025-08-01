@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+    gap: 2em;
+    border: 1px solid green;
+}
+
+:host([direction=columns]) {
+    --column-min-width: 320px;
+    display: block;
+    columns: 10;
+    column-width: var(--column-min-width);
+    widows: 3;
+    orphans: 3;
+    column-rule: 2px dashed #666;
+    width: 100%;
+    border: 1px solid blue;
+
+    ::slotted(*:not(:last-child)) {
+        margin-bottom: 1em;
+    }
+}
+

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/web-components';
 import { html } from "lit";
-import { EChartComponent } from "../../src/chart/echarts/echart.component";
+import { EChartComponent } from "./echart.component";
 
 const meta: Meta = {
   title: "Components/Chart/EChart",
