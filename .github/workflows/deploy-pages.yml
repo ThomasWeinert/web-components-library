@@ -30,7 +30,7 @@ jobs:
           node-version: 22
           
       - name: Build Storybook
-        run: npm build-storybook
+        run: npm run build-storybook
         
       - name: Upload
         uses: actions/upload-pages-artifact@v3
