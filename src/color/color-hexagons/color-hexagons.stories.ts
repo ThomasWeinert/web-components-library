@@ -18,7 +18,7 @@ const meta: Meta = {
         indent: ArgumentControls.selection(['odd', 'even'], {optional: true}),
         direction: ArgumentControls.selection(['row', 'column'], {optional: true}),
         mode: ArgumentControls.selection(['hue' , 'colorize', 'decolorize' , 'darken', 'lighten'], {optional: true}),
-        hexagonRadius: ArgumentControls.selection(['20', '40'], {optional: true}),
+        hexagonRadius: ArgumentControls.selection(['20px', '40px', '2rem'], {optional: true}),
     }
 }
 export default meta;
@@ -74,6 +74,6 @@ export const Decolorize: StoryObj = {
 export const FixedRadius: StoryObj = {
     ...Basic,
     args: {
-        hexagonRadius: 40,
+        hexagonRadius: '40px',
     }
 }

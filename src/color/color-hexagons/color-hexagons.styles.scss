@@ -1,8 +1,4 @@
 :host {
-    --sqrt3: 1.73205081;
-    --hexagon-radius-outer: var(--hexagon-radius, 10px);
-    --hexagon-radius-inner: calc(var(--hexagon-radius-outer) * (var(--sqrt3) * 0.5));
-    --hexagon-height: calc(var(--hexagon-side-length) * var(--sqrt3) * 0.5);
 
     display: flex;
     align-items: center;
@@ -11,6 +7,11 @@
 
 
 .ground {
+    --sqrt3: 1.73205081;
+    --hexagon-radius-outer: var(--hexagon-radius, 10px);
+    --hexagon-radius-inner: calc(var(--hexagon-radius-outer) * (var(--sqrt3) * 0.5));
+    --hexagon-height: calc(var(--hexagon-side-length) * var(--sqrt3) * 0.5);
+
     --margin-y: calc(var(--hexagon-radius-inner) * -1);
     --margin-x: calc(var(--hexagon-radius-outer) * 1.5);
 
@@ -31,6 +32,7 @@ button {
     color: transparent;
     background-color: transparent;
     filter: drop-shadow(0.75px 0.75px var(--hexagon-color));
+    transform: scale(100.1%);
 
     &:after {
         display: block;

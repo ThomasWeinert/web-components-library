@@ -15,16 +15,16 @@ export class ColorHexagonsComponent extends LitElement {
     public steps: number = 9;
 
 
-    private _hexagonRadius?: number;
+    private _hexagonRadius?: string;
 
-    public get hexagonRadius(): number | undefined {
+    public get hexagonRadius(): string | undefined {
         return this._hexagonRadius;
     }
 
-    @property({type: Number, reflect: true, attribute: 'hexagon-radius'})
-    public set hexagonRadius(value: number | undefined) {
+    @property({type: String, reflect: true, attribute: 'hexagon-radius'})
+    public set hexagonRadius(value: string | undefined) {
         this._hexagonRadius = value;
-        this.calculateHexagonSize();
+        this.updateHexagonSize();
     }
 
     @property({type: Number, reflect: true})
@@ -46,7 +46,7 @@ export class ColorHexagonsComponent extends LitElement {
     public direction: 'column' | 'row' = "row";
 
     private _resizeObserver = new ResizeObserver(
-        () => this.calculateHexagonSize(),
+        () => this.updateHexagonSize(),
     );
 
     public connectedCallback() {
@@ -60,7 +60,7 @@ export class ColorHexagonsComponent extends LitElement {
     }
 
     public render(): TemplateResult {
-        this.calculateHexagonSize();
+        this.updateHexagonSize();
         const steps = Array.from(Array(Math.max(this.steps, 1))).map(
             (_, index) => {
                 let hue = this.hue;
@@ -108,9 +108,9 @@ export class ColorHexagonsComponent extends LitElement {
         }
     }
 
-    private calculateHexagonSize() {
-        if (this._hexagonRadius && this._hexagonRadius > 0) {
-            this.style.setProperty('--hexagon-radius', `${this._hexagonRadius}px`);
+    private updateHexagonSize() {
+        if (this._hexagonRadius && this._hexagonRadius !== '') {
+            this.style.setProperty('--hexagon-radius', `${this._hexagonRadius}`);
             return;
         }
         const bounds = this.getBoundingClientRect();
