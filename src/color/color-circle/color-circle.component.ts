@@ -1,18 +1,15 @@
 import {html, LitElement, PropertyValues, TemplateResult, unsafeCSS} from "lit";
 import {customElement, property, query, state} from 'lit/decorators.js';
 import styles from './color-circle.styles.scss?inline';
-import {Subscriptions} from "../events/subscriptions";
-import {EventSubscription} from "../events/event-subscription";
+import {Subscriptions} from "../../events/subscriptions";
+import {EventSubscription} from "../../events/event-subscription";
+import {ColorValueEvent} from "../color-value-event";
 
 const SQRT_3 = Math.sqrt(3);
 
 function clamp(value: number, min: number, max: number) {
     return Math.min(Math.max(value, min), max);
 }
-
-export class ColorCircleValueEvent extends CustomEvent<{ hue: number, saturation: number, lightness: number }> {
-}
-
 
 @customElement('wct-color-circle')
 export class ColorCircleComponent extends LitElement {
@@ -195,13 +192,12 @@ export class ColorCircleComponent extends LitElement {
     }
 
     private emitColorEvent(type: string = 'color-change') {
-        this.dispatchEvent(new CustomEvent(type, {
-            detail: {
+        this.dispatchEvent(new ColorValueEvent(type, {}, {
                 hue: this.hue,
                 saturation: this.saturation,
                 lightness: this.lightness
             }
-        }));
+        ));
     }
 
     private updateFromPosition(clientX: number, clientY: number) {

@@ -1,0 +1,113 @@
+:host {
+    --sqrt3: 1.73205081;
+    --hexagon-radius-outer: var(--hexagon-radius, 10px);
+    --hexagon-radius-inner: calc(var(--hexagon-radius-outer) * (var(--sqrt3) * 0.5));
+    --hexagon-height: calc(var(--hexagon-side-length) * var(--sqrt3) * 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.ground {
+    --margin-y: calc(var(--hexagon-radius-inner) * -1);
+    --margin-x: calc(var(--hexagon-radius-outer) * 1.5);
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+    padding-top: calc(0px - var(--margin-y));
+}
+
+button {
+    box-sizing: border-box;
+    width: calc(var(--hexagon-radius-outer) * 2);
+    position: relative;
+    aspect-ratio: 1/cos(30deg);
+    border: none;
+    margin-top: var(--margin-y);
+    color: transparent;
+    background-color: transparent;
+    filter: drop-shadow(0.75px 0.75px var(--hexagon-color));
+
+    &:after {
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        content: ' ';
+        clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+        background-color: var(--hexagon-color);
+        z-index: 10;
+    }
+
+    &:focus {
+        outline: none;
+        z-index: 1;
+    }
+
+    &:focus-visible {
+        &:after {
+            transform: scale(110%);
+        }
+
+    }
+}
+
+.ground.indent-odd {
+    button:nth-child(odd) {
+        margin-top: var(--margin-y);
+        margin-left: var(--margin-x);
+    }
+}
+
+.ground.indent-even {
+    button:nth-child(even) {
+        margin-top: var(--margin-y);
+        margin-left: var(--margin-x);
+    }
+}
+
+
+:host([direction=row]) {
+    .ground {
+        --margin-x: calc(var(--hexagon-radius-inner) * -1);
+        --margin-y: calc(var(--hexagon-radius-outer) * 1.5);
+        flex-direction: row;
+        padding-top: 0;
+        padding-left: calc(0px - var(--margin-x));
+    }
+
+    button {
+        box-sizing: border-box;
+        width: auto;
+        height: calc(var(--hexagon-radius-outer) * 2);
+        position: relative;
+        aspect-ratio: cos(30deg);
+        margin-top: 0;
+        margin-left: var(--margin-x);
+
+        &:after {
+            clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
+        }
+    }
+
+    .ground.indent-odd {
+        button:nth-child(odd) {
+            margin-top: var(--margin-y);
+            margin-left: var(--margin-x);
+        }
+    }
+
+    .ground.indent-even {
+        button:nth-child(even) {
+            margin-top: var(--margin-y);
+            margin-left: var(--margin-x);
+        }
+    }
+}

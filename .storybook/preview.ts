@@ -1,15 +1,17 @@
-import type { Preview } from '@storybook/web-components-vite'
+import type {Preview} from '@storybook/web-components-vite'
 
 import '../src/index';
-import * as ECharts from "echarts";
-
 import '../src/widgets.scss';
 
-window.echarts = ECharts;
-
 const preview: Preview = {
-  parameters: {
-  },
+    parameters: {
+        docs: {
+            codePanel: true,
+        },
+    },
 };
 
 export default preview;
+
+import * as ECharts from "echarts";
+window.echarts = ECharts;

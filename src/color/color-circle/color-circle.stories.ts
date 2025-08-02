@@ -2,7 +2,7 @@ import {Meta, type StoryObj} from "@storybook/web-components";
 import {html} from "lit";
 
 const meta: Meta = {
-    title: 'Components/ColorCircle',
+    title: 'Components/Color/ColorCircle',
     component: 'wct-color-circle',
     parameters: {
         layout: 'centered',
