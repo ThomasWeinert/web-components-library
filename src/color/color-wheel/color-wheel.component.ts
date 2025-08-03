@@ -66,7 +66,6 @@ export class ColorWheelComponent extends LitElement {
 
         this.hue = ((Math.floor(degrees / 30) * 30) + 30);
         this.lightness = (0.6 * distance) + 0.4;
-        console.log(this.hue, this.lightness);
     }
 
     public render(): TemplateResult {
