@@ -5,5 +5,6 @@ export * from "./chart/chart.component"
 export * from "./chart/echarts/echart.component"
 export * from './color/color-circle/color-circle.component';
 export * from './color/color-hexagons/color-hexagons.component';
+export * from './color/color-wheel/color-wheel.component';
 export * from './stack/stack.component';
 
