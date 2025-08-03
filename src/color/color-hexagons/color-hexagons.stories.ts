@@ -3,6 +3,7 @@ import {ArgumentControls} from "../../../.storybook/argument-controls";
 import {html} from "lit";
 import {ifDefined} from "lit/directives/if-defined.js";
 import {action} from "storybook/actions";
+import {ColorHexagonsMode} from "./color-hexagons.component";
 
 const meta: Meta = {
     title: 'Components/Color/ColorHexagons',
@@ -17,7 +18,7 @@ const meta: Meta = {
         steps: ArgumentControls.range(3, 15),
         indent: ArgumentControls.selection(['odd', 'even'], {optional: true}),
         direction: ArgumentControls.selection(['row', 'column'], {optional: true}),
-        mode: ArgumentControls.selection(['hue' , 'colorize', 'decolorize' , 'darken', 'lighten'], {optional: true}),
+        mode: ArgumentControls.selection(ColorHexagonsMode, {optional: true}),
         hexagonRadius: ArgumentControls.selection(['20px', '40px', '2rem'], {optional: true}),
     }
 }
@@ -46,28 +47,40 @@ export const Column: StoryObj = {
 export const Darken: StoryObj = {
     ...Basic,
     args: {
-        mode: 'darken',
+        mode: ColorHexagonsMode.Darken,
     }
 }
 
 export const Lighten: StoryObj = {
     ...Basic,
     args: {
-        mode: 'lighten',
+        mode: ColorHexagonsMode.Lighten,
     }
 }
 
 export const Hue: StoryObj = {
     ...Basic,
     args: {
-        mode: 'hue',
+        mode: ColorHexagonsMode.Hue,
+    }
+}
+export const Lightness: StoryObj = {
+    ...Basic,
+    args: {
+        mode: ColorHexagonsMode.Lightness,
+    }
+}
+export const Saturation: StoryObj = {
+    ...Basic,
+    args: {
+        mode: ColorHexagonsMode.Saturation,
     }
 }
 
 export const Decolorize: StoryObj = {
     ...Basic,
     args: {
-        mode: 'decolorize',
+        mode: ColorHexagonsMode.Decolorize,
     }
 }
 

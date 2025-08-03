@@ -7,6 +7,17 @@ import {ColorValueEvent} from "../color-value-event";
 
 const SQRT_3 = Math.sqrt(3);
 
+export type ColorHexagonsMode = 'hue' | 'saturation' | 'lightness' | 'colorize' | 'decolorize' | 'darken' | 'lighten';
+export const ColorHexagonsMode = {
+    Hue: 'hue' as ColorHexagonsMode,
+    Saturation: 'saturation' as ColorHexagonsMode,
+    Lightness: 'lightness' as ColorHexagonsMode,
+    Colorize: 'colorize' as ColorHexagonsMode,
+    Decolorize: 'decolorize' as ColorHexagonsMode,
+    Darken: 'darken' as ColorHexagonsMode,
+    Lighten: 'lighten' as ColorHexagonsMode,
+}
+
 @customElement('wct-color-hexagons')
 export class ColorHexagonsComponent extends LitElement {
     public static styles = unsafeCSS(styles);
@@ -37,7 +48,7 @@ export class ColorHexagonsComponent extends LitElement {
     public lightness: number = 0.5;
 
     @property({type: String, reflect: true})
-    public mode: 'hue' | 'colorize' | 'decolorize' | 'darken' | 'lighten' = "darken";
+    public mode: ColorHexagonsMode = ColorHexagonsMode.Darken;
 
     @property({type: String, reflect: true})
     public indent: 'odd' | 'even' = "even";
@@ -66,14 +77,18 @@ export class ColorHexagonsComponent extends LitElement {
                 let hue = this.hue;
                 let saturation = this.saturation;
                 let lightness = this.lightness;
-                if (this.mode === 'hue') {
+                if (this.mode === ColorHexagonsMode.Hue) {
                     const stepValue = this.getStepValue(index, this.steps + 1, this.hue, this.hue + 360);
                     hue = stepValue >= 360 ? stepValue - 360 : stepValue;
-                } else if (this.mode === 'colorize') {
+                } else if (this.mode === ColorHexagonsMode.Lightness) {
+                    lightness = this.getStepValue(index, this.steps, 1, 0);
+                } else if (this.mode === ColorHexagonsMode.Saturation) {
+                    saturation = this.getStepValue(index, this.steps, 1, 0);
+                } else if (this.mode === ColorHexagonsMode.Colorize) {
                     saturation = this.getStepValue(index, this.steps, this.saturation, 1);
-                } else if (this.mode === 'decolorize') {
+                } else if (this.mode === ColorHexagonsMode.Decolorize) {
                     saturation = this.getStepValue(index, this.steps, this.saturation, 0);
-                } else if (this.mode === 'darken') {
+                } else if (this.mode === ColorHexagonsMode.Darken) {
                     lightness = this.getStepValue(index, this.steps, this.lightness, 0);
                 } else {
                     lightness = this.getStepValue(index, this.steps, this.lightness, 1);
