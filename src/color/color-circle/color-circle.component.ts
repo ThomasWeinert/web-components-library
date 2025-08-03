@@ -107,11 +107,54 @@ export class ColorCircleComponent extends LitElement {
         }
     }
 
+    private handleRingKeyPress(event: KeyboardEvent) {
+        let value = 1;
+        if (event.shiftKey) {
+            value = 10;
+        } else if (event.ctrlKey) {
+            value = 30;
+        }
+        if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+            event.preventDefault();
+            this.addHue(value);
+        } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+            event.preventDefault();
+            this.addHue(0 - value);
+        }
+    };
+
+    private addHue(value: number) {
+        const hue = this.hue + value;
+        this.hue = hue >= 360 ? hue - 360 : (hue < 0 ? 360 + hue : hue);
+    }
+
     private handleTriangleMouseDown() {
         if (!this._circleChanging) {
             this._triangleChanging = true;
         }
     }
+
+    private handleTriangleKeyPress(event: KeyboardEvent) {
+        let value = 0.01;
+        if (event.shiftKey) {
+            value = 0.05;
+        } else if (event.ctrlKey) {
+            value = 0.10;
+        }
+        if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            this.saturation = Math.max(0, Math.min(this.saturation + value, 1));
+        } else if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            this.saturation = Math.max(0, Math.min(this.saturation - value, 1));
+        } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            this.lightness = Math.max(0, Math.min(this.lightness - value, 1));
+        } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            this.lightness = Math.max(0, Math.min(this.lightness + value, 1));
+        }
+    };
 
     private getHueFromPosition(clientX: number, clientY: number) {
         const bounds = this._circle.getBoundingClientRect();
@@ -135,15 +178,19 @@ export class ColorCircleComponent extends LitElement {
             <div class="ground">
                 <div
                     class="circle"
+                    tabindex="0"
                     @mousedown=${this.handleRingMouseDown}
-                    @touchstart=${this.handleRingMouseDown}></div>
+                    @touchstart=${this.handleRingMouseDown}
+                    @keydown=${this.handleRingKeyPress}></div>
                 <div class="triangle-container">
                     <div
-                        class="triangle">
+                        class="triangle"
+                        tabindex="0"
+                        @mousedown=${this.handleTriangleMouseDown}
+                        @touchstart=${this.handleTriangleMouseDown}
+                        @keydown=${this.handleTriangleKeyPress}>
                         <div
-                            class="triangle-gradient"
-                            @mousedown=${this.handleTriangleMouseDown}
-                            @touchstart=${this.handleTriangleMouseDown}>
+                            class="triangle-gradient">
                             <span class="triangle-indicator"></span>
                         </div>
                     </div>
