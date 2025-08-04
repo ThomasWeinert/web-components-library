@@ -87,7 +87,7 @@ button {
 
     button {
         box-sizing: border-box;
-        width: auto;
+        width: calc(var(--hexagon-radius-inner) * 2);
         height: calc(var(--hexagon-radius-outer) * 2);
         position: relative;
         aspect-ratio: cos(30deg);
